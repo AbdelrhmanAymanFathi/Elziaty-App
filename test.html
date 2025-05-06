@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رصيد المحفظة / Wallet Balance</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="mainLayout.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar Top -->
+  <header class="bg-white shadow p-4 flex justify-between items-center">
+    <div class="flex space-x-4 rtl:space-x-reverse">
+      <button title="الإشعارات / Notifications" class="text-xl text-gray-600 hover:text-gray-800"><i class="bi bi-bell-fill"></i></button>
+      <button title="الرائج / Trends" class="text-xl text-gray-600 hover:text-gray-800"><i class="bi bi-fire"></i></button>
+    </div>
+    <div id="profile-toggle" class="relative">
+      <button title="الملف الشخصي / Profile" class="text-3xl text-gray-600 hover:text-gray-800"><i class="bi bi-person-circle"></i></button>
+      <div id="popup-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2">
+        <a href="./profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">الملف الشخصي</a>
+        <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">الإعدادات</button>
+        <button id="logout-btn" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">تسجيل خروج</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto py-8 px-4">
+    <!-- Top Up Button -->
+    <div class="flex justify-center mb-4">
+      <button id="topup-btn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">شحن المحفظة</button>
+    </div>
+
+    <!-- Top Up Modal -->
+    <div id="topup-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+      <div class="bg-white p-6 rounded-lg w-80">
+        <h3 class="text-lg font-semibold mb-4">شحن المحفظة</h3>
+        <input id="topup-amount" type="number" placeholder="ادخل المبلغ" class="w-full border rounded px-3 py-2 mb-4" />
+        <div class="flex justify-end space-x-2 rtl:space-x-reverse">
+          <button id="topup-cancel" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">إلغاء</button>
+          <button id="topup-ok" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700">موافق</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wallet Balance Card -->
+    <section class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 mb-8 rtl">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">رصيد المحفظة</h2>
+      <p id="wallet-balance" class="text-3xl font-bold text-green-500">جاري التحميل...</p>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section>
+      <h3 class="text-xl font-medium text-gray-700 mb-4 text-center">الجمعيات المشتركة</h3>
+      <div id="circle-list">
+        <!-- هنا سيُعرض محتوى الجمعيات التي انضممت إليها -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Navbar Bottom -->
+  <nav class="bg-white shadow fixed bottom-0 w-full">
+    <div class="flex justify-around py-2">
+      <button onclick="location.href='home.html'" class="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <i class="bi bi-house-door-fill text-2xl"></i>
+        <span class="text-xs">الرئيسية</span>
+      </button>
+      <button onclick="location.href='circle-list.html'" class="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <i class="bi bi-people-fill text-2xl"></i>
+        <span class="text-xs">جمعياتي</span>
+      </button>
+      <button onclick="location.href='join.html'" class="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <i class="bi bi-card-checklist text-2xl"></i>
+        <span class="text-xs">اشتراك</span>
+      </button>
+      <button onclick="location.href='./wallet.html'" class="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <i class="bi bi-credit-card-fill text-2xl"></i>
+        <span class="text-xs">المحفظة</span>
+      </button>
+      <button onclick="location.href='payments.html'" class="flex flex-col items-center text-gray-600 hover:text-blue-600">
+        <i class="bi bi-file-earmark-check-fill text-2xl"></i>
+        <span class="text-xs">المدفوعات</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Profile dropdown
+      document.getElementById('profile-toggle').addEventListener('click', () => {
+        document.getElementById('popup-menu').classList.toggle('hidden');
+      });
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
+      });
+
+      // Token & balance element
+      const token = localStorage.getItem('token');
+      const balanceEl = document.getElementById('wallet-balance');
+      if (!token) {
+        balanceEl.textContent = 'يرجى تسجيل الدخول';
+        return;
+      }
+
+      // Fetch current balance
+      fetch('http://localhost:3000/api/users/wallet', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+          balanceEl.textContent = new Intl.NumberFormat('en-US', {
+            style: 'currency', currency: 'EGP', currencyDisplay: 'code'
+          }).format(data.walletBalance);
+        })
+        .catch(err => {
+          console.error('Fetch wallet error:', err);
+          balanceEl.textContent = 'خطأ في التحميل';
+        });
+
+      // Top-Up modal logic
+      const modal = document.getElementById('topup-modal');
+      const btnOpen = document.getElementById('topup-btn');
+      const btnCancel = document.getElementById('topup-cancel');
+      const btnOk = document.getElementById('topup-ok');
+      const inputAmt = document.getElementById('topup-amount');
+
+      btnOpen.addEventListener('click', () => modal.classList.remove('hidden'));
+      btnCancel.addEventListener('click', () => modal.classList.add('hidden'));
+
+      btnOk.addEventListener('click', () => {
+        const amount = parseFloat(inputAmt.value);
+        if (isNaN(amount) || amount <= 0) {
+          alert('يرجى إدخال مبلغ صحيح أكبر من صفر');
+          return;
+        }
+        fetch('http://localhost:3000/api/payments/topup', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ amount })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              balanceEl.textContent = new Intl.NumberFormat('en-US', {
+                style: 'currency', currency: 'EGP', currencyDisplay: 'code'
+              }).format(data.newBalance);
+              modal.classList.add('hidden');
+              inputAmt.value = '';
+              alert(data.message);
+            } else {
+              alert(data.error || 'فشل في الشحن');
+            }
+          })
+          .catch(err => {
+            console.error('Top-up error:', err);
+            alert('حدث خطأ أثناء الشحن');
+          });
+      });
+    });
+  </script>
+</body>
+
+</html>

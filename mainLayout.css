@@ -1,134 +1,134 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f9;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
 
-  }
-
-
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 5px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .navbar .icon {
-    margin: 0 8px;
-    /* font-size: 24px; */
-    cursor: pointer;
-    background: silver;
-    color: black;
-    border-radius: 50%;
-    padding: 8px 11px;
-  }
-
-  .navbar .icon:hover {
-    color: #ff5722;
-  }
-
-  .user-profile {
-    position: relative;
-    font-size: 32px;
-    cursor: pointer;
-  }
-
-  .popup-menu {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    width: 150px;
-    z-index: 1000;
-  }
-
-  .popup-menu.active {
-    display: block;
-  }
-
-  .popup-menu a {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: none;
-    text-align: left;
-    font-size: 14px;
-    cursor: pointer;
-    color: black;
-  }
-  .popup-menu button {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: none;
-    text-align: left;
-    font-size: 14px;
-    cursor: pointer;
-
-  }
+}
 
 
-  /* .popup-menu .logout-btn {
-    background: #d9534f;
-    color: #fff;
-    border-radius: 0 0 5px 5px;
-  } */
 
-  .dashboard-container {
-    padding: 20px;
-    margin-bottom: 80px;
-  }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .circle-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 12px;
-  }
+.navbar .icon {
+  margin: 0 8px;
+  /* font-size: 24px; */
+  cursor: pointer;
+  background: silver;
+  color: black;
+  border-radius: 50%;
+  padding: 8px 11px;
+}
 
-  .circle-card h5 {
-    font-size: 18px;
-    font-weight: bold;
-  }
+.navbar .icon:hover {
+  color: #ff5722;
+}
 
-  .circle-card p {
-    margin: 6px 0;
-    font-size: 14px;
-    color: #555;
-  }
+.user-profile {
+  position: relative;
+  font-size: 32px;
+  cursor: pointer;
+}
 
-  .bottom-navbar {
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: #fff;
-    padding: 8px 0;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-  }
+.popup-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  z-index: 1000;
+}
 
-  .bottom-navbar .icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: black;
-  }
+.popup-menu.active {
+  display: block;
+}
 
-  .bottom-navbar .icon:hover {
-    color: #ff5722;
-  }
+.popup-menu a {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+}
+.popup-menu button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
 
-  .bottom-navbar .label {
-    font-size: 12px;
-    margin-top: 2px;
-  }
+}
+
+
+/* .popup-menu .logout-btn {
+  background: #d9534f;
+  color: #fff;
+  border-radius: 0 0 5px 5px;
+} */
+
+.dashboard-container {
+  padding: 20px;
+  margin-bottom: 80px;
+}
+
+.circle-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.circle-card h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.circle-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.bottom-navbar {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+  padding: 8px 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-navbar .icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+}
+
+.bottom-navbar .icon:hover {
+  color: #ff5722;
+}
+
+.bottom-navbar .label {
+  font-size: 12px;
+  margin-top: 2px;
+}

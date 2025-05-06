@@ -28,7 +28,7 @@
         listEl.innerHTML = '';
 
         if (!json.data || json.data.length === 0) {
-          listEl.innerHTML = '<p class="text-center text-muted">لم تنضم إلى أي جمعيات بعد / You have not joined any associations yet.</p>';
+          listEl.innerHTML = '<p class="text-center text-muted"> You have not joined any associations yet.</p>';
           return;
         }
 

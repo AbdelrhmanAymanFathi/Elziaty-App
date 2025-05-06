@@ -1,4 +1,14 @@
 
+    // Dropdown للملف الشخصي
+    document.getElementById('profile-toggle').addEventListener('click', () => {
+      document.getElementById('popup-menu').classList.toggle('active');
+    });
+
+    // زر تسجيل الخروج
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    });
 
 // التحقق من وجود التوكن
 const token = localStorage.getItem('token');
