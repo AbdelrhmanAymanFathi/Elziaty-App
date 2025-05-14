@@ -19,7 +19,7 @@ if (!token) {
 // جلب بيانات الملف الشخصي
 async function loadProfile() {
   try {
-    const res = await fetch('http://localhost:3000/api/users/profile', {
+    const res = await fetch('http://localhost:3000/api/userData/profile', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();

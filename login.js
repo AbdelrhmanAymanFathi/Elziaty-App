@@ -17,16 +17,16 @@ document.getElementById("login-form").addEventListener("submit", async function(
     const data = await response.json();
 
     if (response.ok) {
-      alert("✅ تم تسجيل الدخول بنجاح");
+      alert("✅ Successfully logged in!");
       console.log("TOKEN:", data.token); // احفظ التوكن في session storge مثلاً
       localStorage.setItem("token", data.token);
       // redirect لو حابب
       window.location.href = "./home.html";
     } else {
-      alert("❌ فشل تسجيل الدخول: " + data.message);
+      alert("❌Faild to Login: " + data.message);
     }
   } catch (error) {
-    alert("حدث خطأ أثناء الاتصال بالسيرفر");
+    alert("An error occurred while connecting to the server");
     console.error(error);
   }
 });

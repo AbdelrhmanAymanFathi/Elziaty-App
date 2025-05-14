@@ -1,0 +1,208 @@
+  <!-- html -->
+
+  <!-- Navbar Top -->
+  <div class="navbar">
+    <div class="d-flex">
+      <span class="icon" title="الإشعارات / Notifications"><i class="bi bi-bell-fill"></i></span>
+      <span class="icon" title="الرائج / Trends"><i class="bi bi-fire"></i></span>
+    </div>
+    <div class="user-profile" id="profile-toggle" title="الملف الشخصي / Profile">
+      <i class="bi bi-person-circle"></i>
+      <div class="popup-menu" id="popup-menu">
+        <a href="./profile.html" class="text-sm text-black">Profile</a>
+        <button>Settings </button>
+        <button class="logout-btn" id="logout-btn">Logout</button>   
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Navbar Bottom -->
+  <div class="bottom-navbar">
+    <div onclick="location.href='home.html'">
+      <i class="bi bi-house-door-fill"></i>
+      <div class="label"> Home</div>
+    </div>
+    <div onclick="location.href='circle-list.html'">
+      <i class="bi bi-people-fill"></i>
+      <div class="label"> My Circles</div>
+    </div>
+    <div onclick="location.href='join.html'">
+      <i class="bi bi-card-checklist"></i>
+      <div class="label"> Subscribe</div>
+    </div>
+    <div onclick="location.href='./wallet.html'">
+      <i class="bi bi-credit-card-fill"></i>
+      <div class="label"> wallet </div>
+    </div>
+    <div onclick="location.href='payments.html'">
+      <i class="bi bi-file-earmark-check-fill"></i>
+      <div class="label"> Payments</div>
+    </div>
+  </div>
+
+  /* JavaScript */
+  // تأكد من وجود التوكن وإعادة التوجيه للـ login إذا لم يكن موجودًا
+const token = localStorage.getItem("token");
+if (!token) {
+  window.location.href = "login.html";
+}
+
+// Dropdown للملف الشخصي
+document.getElementById("profile-toggle").addEventListener("click", () => {
+  document.getElementById("popup-menu").classList.toggle("active");
+});
+
+// زر تسجيل الخروج
+document.getElementById("logout-btn").addEventListener("click", () => {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
+});
+
+
+  /* css */
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+
+}
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .icon {
+  margin: 0 8px;
+  /* font-size: 24px; */
+  cursor: pointer;
+  background: silver;
+  color: black;
+  border-radius: 50%;
+  padding: 8px 11px;
+}
+
+.navbar .icon:hover {
+  color: #ff5722;
+}
+
+.user-profile {
+  position: relative;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.popup-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  z-index: 1000;
+}
+
+.popup-menu.active {
+  display: block;
+}
+
+.popup-menu a {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+}
+.popup-menu button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+
+
+/* .popup-menu .logout-btn {
+  background: #d9534f;
+  color: #fff;
+  border-radius: 0 0 5px 5px;
+} */
+
+.dashboard-container {
+  padding: 20px;
+  margin-bottom: 80px;
+}
+
+.circle-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.circle-card h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.circle-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.bottom-navbar {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+  padding: 8px 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-navbar .icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+}
+
+.bottom-navbar .icon:hover {
+  color: #ff5722;
+}
+
+.bottom-navbar .label {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+
+     const card = document.createElement("div");
+      card.className = "circle-card shadow-sm mb-3 rounded-xl p-3";
+      card.innerHTML = `
+            <h5> <img src="./Assets/imgs/circle.svg" width="30px"> ${a.name} </h5> <!--/ ${a.name_en || ""}-->
+          <p>Joined on: ${joinDate} </p>
+            <p>Monthly amount: ${a.monthlyAmount} | Duration: ${
+        a.duration
+      } month</p>
+            <p>Status: ${a.status} </p>

@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>جمعياتي / My Associations</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="mainLayout.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Association</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="./mainLayout.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { background-color: #f8f9fa; }
+    .suggestion-card {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .suggestion-card:hover { transform: translateY(-5px); }
+    .section-heading {
+      border-bottom: 2px solid #dee2e6;
+      padding-bottom: .5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
-
 <body>
-
   <!-- Navbar Top -->
   <div class="navbar">
     <div class="d-flex">
@@ -23,15 +43,40 @@
       <div class="popup-menu" id="popup-menu">
         <a href="./profile.html" class="text-sm text-black">Profile</a>
         <button>Settings </button>
-        <button class="logout-btn" id="logout-btn">Logout</button>  
+        <button class="logout-btn" id="logout-btn">Logout</button>   
       </div>
     </div>
   </div>
 
-  <!--  Content -->
-  <div class="">
+<main>
+  <div class="container py-5">
 
+    <!-- My Associations -->
+    <div id="joinedSection" class="mb-5 d-none">
+      <h3 class="section-heading">My Associations</h3>
+      <div id="joinedContainer" class="row g-4 p-2"></div>
+    </div>
+
+    <!-- Suggest New -->
+    <h2 class="mb-4 text-center">Suggested Associations</h2>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Enter Desired Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        class="form-control"
+        placeholder="e.g. 11000"
+        min="1"
+      />
+    </div>
+    <button id="fetchSuggestions" class="btn btn-primary w-100 mb-4">
+      Find Associations
+    </button>
+    <div id="suggestionsContainer" class="row g-4 p-2"></div>
   </div>
+
+</main>
+
 
   <!-- Navbar Bottom -->
   <div class="bottom-navbar">
@@ -58,10 +103,10 @@
   </div>
 
 
+  
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
   <script src="./join.js"></script>
 </body>
-
 </html>

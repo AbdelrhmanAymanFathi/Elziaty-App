@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
   const balanceEl = document.getElementById('wallet-balance');
   if (!token) {
-    balanceEl.textContent = 'يرجى تسجيل الدخول';
+    balanceEl.textContent = 'you need to login first';
     return;
   }
 
   // جلب الرصيد الحالي من السيرفر
-  fetch('http://localhost:3000/api/users/wallet', {
+  fetch('http://localhost:3000/api/userData/wallet', {
     headers: { 'Authorization': `Bearer ${token}` }
   })
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => {
       console.error('Fetch wallet error:', err);
-      balanceEl.textContent = 'خطأ في التحميل';
+      balanceEl.textContent = 'error loading balance';
     });
 
   // عناصر المودال
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnOk.addEventListener('click', () => {
     const amount = parseFloat(inputAmt.value);
     if (isNaN(amount) || amount <= 0) {
-      alert('يرجى إدخال مبلغ صحيح أكبر من صفر');
+      alert('Please enter an integer greater than zero');
       return;
     }
 
@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json())
       .then(data => {
         if (!data.success) {
-          alert(data.error || 'فشل في الشحن');
+          alert(data.error || 'Failed to load');
           return Promise.reject();
         }
         // لو نجح الشحن، نعيد جلب الرصيد الفعلي
-        return fetch('http://localhost:3000/api/users/wallet', {
+        return fetch('http://localhost:3000/api/userData/wallet', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       })
@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }).format(walletData.walletBalance);
         modal.classList.add('hidden');
         inputAmt.value = '';
-        alert('تمت عملية الشحن بنجاح');
-      })
+        alert('The shipment was successful');
+            })
       .catch(err => {
         console.error('Top-up error:', err);
       });

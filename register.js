@@ -1,4 +1,4 @@
-document.getElementById('register-form').addEventListener('submit', async function(e) {
+document.getElementById('register-form').addEventListener('submit', async function (e) {
   e.preventDefault(); // منع إعادة التحميل
   const form = document.getElementById('register-form');
   const formData = new FormData(form); // نستخدم FormData للحقول والملفات
@@ -13,16 +13,16 @@ document.getElementById('register-form').addEventListener('submit', async functi
     const data = await response.json();
 
     if (response.ok) {
-      alert('✅ تم إنشاء الحساب بنجاح! / Registration successful!');
+      alert(' Registration successful!');
       console.log('User created:', data);
       // بعد التسجيل ممكن تحويل للصفحة التالية:
       window.location.href = 'login.html';
     } else {
-      alert('❌ فشل التسجيل: ' + (data.message || JSON.stringify(data)));
+      alert('❌ Registration failed: ' + (data.message || JSON.stringify(data)));
       console.error('Error:', data);
     }
   } catch (err) {
-    alert('حدث خطأ في الاتصال بالسيرفر / Server connection error');
+    alert(' Server connection error');
     console.error(err);
   }
 });
