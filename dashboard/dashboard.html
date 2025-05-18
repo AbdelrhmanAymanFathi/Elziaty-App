@@ -6,20 +6,39 @@
   <title>لوحة التحكم - الإدارة</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=dashboard" />
+  <style>
+
+  aside {
+    background-color: #129990;
+    color: #eee;
+  }
+  aside nav button {
+    background-color: #129990;
+    color: #eee;
+  }
+    aside nav button:hover {
+      background-color: #0f7a7a;
+      color: #fff;
+      padding: 3% 5%;
+    }
+  
+</style>
 </head>
 <body class="flex bg-gray-100 min-h-screen text-right">
 
+
   <!-- Sidebar -->
-  <aside class="w-64 bg-white shadow-md h-screen fixed right-0 top-0 p-6 flex flex-col justify-between">
+  <aside class="w-64 shadow-md h-screen fixed right-0 top-0 p-6 flex flex-col justify-between">
     <div>
-      <h1 class="text-2xl font-bold text-gray-800 mb-8">لوحة التحكم</h1>
+      <h1 class="text-2xl font-bold  mb-8">لوحة التحكم</h1>
       <nav class="space-y-4">
-        <button onclick="loadAssociations()" class="w-full text-right text-gray-700 hover:text-blue-500">عرض الجمعيات</button>
-        <button onclick="openCreateAssociationModal()" class="w-full text-right text-green-600 hover:text-green-800">إنشاء جمعية</button>
-        <button onclick="openCreateUserModal()" class="w-full text-right text-indigo-600 hover:text-indigo-800">إنشاء مستخدم</button>
+        <button onclick="loadAssociations()" class="w-full text-right  "> عرض الجمعيات </button>
+        <button onclick="openCreateAssociationModal()" class="w-full text-right  ">إنشاء جمعية</button>
+        <button onclick="openCreateUserModal()" class="w-full text-right ">إنشاء مستخدم</button>
       </nav>
     </div>
-    <div class="text-sm text-gray-500">© 2025 FundCircle</div>
+    <div class="text-sm text-white">© 2025 FundCircle</div>
   </aside>
 
   <!-- Main Content -->
@@ -141,7 +160,7 @@
     }
 
     // Create Association
-    function openCreateAssociationModal() { document.getElementById('createAssociationModal').classList.remove('hidden'); }
+    function openCreateAssociationModal() { document.getElementById('createAssociationModal').classList.remove('hidden');document.getElementById('createAssociationModal').classList.add('flex'); }
     function closeCreateAssociationModal() { document.getElementById('createAssociationModal').classList.add('hidden'); }
     document.getElementById('createAssociationForm').onsubmit = async e => {
       e.preventDefault();
@@ -156,6 +175,7 @@
       const form = document.getElementById('editAssociationForm');
       form.id.value=id; form.monthlyAmount.value=amount; form.duration.value=duration; form.status.value=status;
       document.getElementById('editAssociationModal').classList.remove('hidden');
+       document.getElementById('editAssociationModal').classList.add('flex');
     }
     function closeEditAssociationModal() { document.getElementById('editAssociationModal').classList.add('hidden'); }
     document.getElementById('editAssociationForm').onsubmit = async e => {
@@ -166,7 +186,7 @@
     };
 
     // Delete Association
-    function openDeleteAssociationModal(id) { document.getElementById('deleteAssocId').value=id; document.getElementById('deleteAssociationModal').classList.remove('hidden'); }
+    function openDeleteAssociationModal(id) { document.getElementById('deleteAssocId').value=id; document.getElementById('deleteAssociationModal').classList.remove('hidden'); document.getElementById('deleteAssociationModal').classList.add('flex'); }
     function closeDeleteAssociationModal() { document.getElementById('deleteAssociationModal').classList.add('hidden'); }
     async function confirmDeleteAssociation() {
       const id=document.getElementById('deleteAssocId').value;
@@ -175,7 +195,7 @@
     }
 
     // Create User
-    function openCreateUserModal() { document.getElementById('createUserModal').classList.remove('hidden'); }
+    function openCreateUserModal() { document.getElementById('createUserModal').classList.remove('hidden');  document.getElementById('createUserModal').classList.add('flex'); }
     function closeCreateUserModal() { document.getElementById('createUserModal').classList.add('hidden'); }
     document.getElementById('createUserForm').onsubmit = async e => {
       e.preventDefault(); const form=e.target; const body=Object.fromEntries(new FormData(form));
