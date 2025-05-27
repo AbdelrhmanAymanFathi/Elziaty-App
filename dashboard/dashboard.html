@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>لوحة التحكم - الإدارة</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=dashboard" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=dashboard" />
   <style>
+    aside {
+      background-color: #129990;
+      color: #eee;
+    }
 
-  aside {
-    background-color: #129990;
-    color: #eee;
-  }
-  aside nav button {
-    background-color: #129990;
-    color: #eee;
-  }
+    aside nav button {
+      background-color: #129990;
+      color: #eee;
+    }
+
     aside nav button:hover {
       background-color: #0f7a7a;
       color: #fff;
       padding: 3% 5%;
     }
-  
-</style>
+  </style>
 </head>
+
 <body class="flex bg-gray-100 min-h-screen text-right">
 
 
@@ -36,6 +39,9 @@
         <button onclick="loadAssociations()" class="w-full text-right  "> عرض الجمعيات </button>
         <button onclick="openCreateAssociationModal()" class="w-full text-right  ">إنشاء جمعية</button>
         <button onclick="openCreateUserModal()" class="w-full text-right ">إنشاء مستخدم</button>
+        <!-- داخل <nav> جنب الأزرار الحالية -->
+        <button onclick="loadUsers()" class="w-full text-right">عرض المستخدمين</button> <!-- View Users -->
+
       </nav>
     </div>
     <div class="text-sm text-white">© 2025 FundCircle</div>
@@ -57,12 +63,16 @@
       <h2 class="text-xl font-bold mb-4">إنشاء جمعية جديدة</h2>
       <form id="createAssociationForm" class="space-y-3">
         <input name="name" placeholder="الاسم" class="w-full border p-2 rounded" required />
-        <input name="monthlyAmount" type="number" placeholder="المبلغ الشهري" class="w-full border p-2 rounded" required />
+        <input name="monthlyAmount" type="number" placeholder="المبلغ الشهري" class="w-full border p-2 rounded"
+          required />
         <input name="duration" type="number" placeholder="المدة" class="w-full border p-2 rounded" required />
         <input name="durationUnit" placeholder="وحدة المدة (مثلاً: weeks)" class="w-full border p-2 rounded" required />
         <input name="type" placeholder="النوع (مثلاً: B)" class="w-full border p-2 rounded" required />
+        <input name="maxMembers" type="number" placeholder="الحد الأعلى للأعضاء" class="w-full border p-2 rounded"
+          min="2" max="15" required />
         <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-          <button type="button" onclick="closeCreateAssociationModal()" class="bg-gray-300 px-4 py-2 rounded">إلغاء</button>
+          <button type="button" onclick="closeCreateAssociationModal()"
+            class="bg-gray-300 px-4 py-2 rounded">إلغاء</button>
           <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">إنشاء</button>
         </div>
       </form>
@@ -75,14 +85,20 @@
       <h2 class="text-xl font-bold mb-4">تعديل الجمعية</h2>
       <form id="editAssociationForm" class="space-y-3">
         <input name="id" type="hidden" />
-        <input name="monthlyAmount" type="number" placeholder="المبلغ الشهري" class="w-full border p-2 rounded" required />
+        <input name="monthlyAmount" type="number" placeholder="المبلغ الشهري" class="w-full border p-2 rounded"
+          required />
         <input name="duration" type="number" placeholder="المدة" class="w-full border p-2 rounded" required />
+        <input name="durationUnit" placeholder="وحدة المدة (مثلاً: weeks)" class="w-full border p-2 rounded" required />
+        <input name="type" placeholder="النوع (مثلاً: B)" class="w-full border p-2 rounded" required />
+        <input name="maxMembers" type="number" placeholder="الحد الأعلى للأعضاء" class="w-full border p-2 rounded"
+          min="2" max="15" required />
         <select name="status" class="w-full border p-2 rounded">
           <option value="pending">قيد الانتظار</option>
           <option value="active">نشطة</option>
         </select>
         <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-          <button type="button" onclick="closeEditAssociationModal()" class="bg-gray-300 px-4 py-2 rounded">إلغاء</button>
+          <button type="button" onclick="closeEditAssociationModal()"
+            class="bg-gray-300 px-4 py-2 rounded">إلغاء</button>
           <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">حفظ</button>
         </div>
       </form>
@@ -123,88 +139,29 @@
     </div>
   </div>
 
-  <script>
-    const token = localStorage.getItem('token');
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const assocApi = 'http://localhost:3000/api/associations';
-    const userApi = 'http://localhost:3000/api/admin/create-user';
+  <!-- تحت الـ <template id="associationsTemplate"> -->
+<template id="usersTemplate">
+  <table class="min-w-full bg-white rounded-lg shadow">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">#</th>
+        <th class="px-4 py-2">الاسم الكامل</th>
+        <th class="px-4 py-2">الرقم القومي</th>
+        <th class="px-4 py-2">الهاتف</th>
+        <th class="px-4 py-2">الرصيد</th>
+        <th class="px-4 py-2">الدور</th>
+        <th class="px-4 py-2">تاريخ الإنشاء</th>
+      </tr>
+    </thead>
+    <tbody id="usersContainer"></tbody>
+  </table>
+</template>
 
-    // Render helper
-    function renderAssociationCard(assoc) {
-      return `
-        <div class="bg-white p-4 rounded-lg shadow space-y-2">
-          <h3 class="font-bold text-lg">${assoc.name}</h3>
-          <p>المبلغ الشهري: ${assoc.monthlyAmount}</p>
-          <p>المدة: ${assoc.duration} ${assoc.type}</p>
-          <p>الحالة: ${assoc.status}</p>
-          <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-            <button onclick="openEditAssociationModal(${assoc.id}, ${assoc.monthlyAmount}, ${assoc.duration}, '${assoc.status}')" class="text-blue-600">تعديل</button>
-            <button onclick="openDeleteAssociationModal(${assoc.id})" class="text-red-600">حذف</button>
-          </div>
-        </div>
-      `;
-    }
 
-    // Load associations
-    async function loadAssociations() {
-      document.getElementById('contentContainer').innerHTML = document.getElementById('associationsTemplate').innerHTML;
-      try {
-        const res = await axios.get(`${assocApi}?page=1&pageSize=5&status=pending`);
-        const data = res.data;
-        if (!Array.isArray(data.data)) throw new Error();
-        const container = document.getElementById('associationsContainer');
-        container.innerHTML = data.data.map(renderAssociationCard).join('');
-      } catch (e) {
-        document.getElementById('associationsContainer').innerHTML = `<div class="text-red-500 p-4">⚠️ لا توجد جمعيات.</div>`;
-      }
-    }
+  <!--  -->
+  <script src="./dashboard.js">
 
-    // Create Association
-    function openCreateAssociationModal() { document.getElementById('createAssociationModal').classList.remove('hidden');document.getElementById('createAssociationModal').classList.add('flex'); }
-    function closeCreateAssociationModal() { document.getElementById('createAssociationModal').classList.add('hidden'); }
-    document.getElementById('createAssociationForm').onsubmit = async e => {
-      e.preventDefault();
-      const form = e.target; const body = Object.fromEntries(new FormData(form));
-      body.monthlyAmount = +body.monthlyAmount; body.duration = +body.duration;
-      await axios.post(assocApi, body);
-      closeCreateAssociationModal(); loadAssociations();
-    };
-
-    // Edit Association
-    function openEditAssociationModal(id, amount, duration, status) {
-      const form = document.getElementById('editAssociationForm');
-      form.id.value=id; form.monthlyAmount.value=amount; form.duration.value=duration; form.status.value=status;
-      document.getElementById('editAssociationModal').classList.remove('hidden');
-       document.getElementById('editAssociationModal').classList.add('flex');
-    }
-    function closeEditAssociationModal() { document.getElementById('editAssociationModal').classList.add('hidden'); }
-    document.getElementById('editAssociationForm').onsubmit = async e => {
-      e.preventDefault(); const form=e.target; const id=form.id.value;
-      const body={ monthlyAmount:+form.monthlyAmount.value, duration:+form.duration.value, status:form.status.value };
-      await axios.put(`${assocApi}/${id}`, body);
-      closeEditAssociationModal(); loadAssociations();
-    };
-
-    // Delete Association
-    function openDeleteAssociationModal(id) { document.getElementById('deleteAssocId').value=id; document.getElementById('deleteAssociationModal').classList.remove('hidden'); document.getElementById('deleteAssociationModal').classList.add('flex'); }
-    function closeDeleteAssociationModal() { document.getElementById('deleteAssociationModal').classList.add('hidden'); }
-    async function confirmDeleteAssociation() {
-      const id=document.getElementById('deleteAssocId').value;
-      await axios.delete(`${assocApi}/${id}`);
-      closeDeleteAssociationModal(); loadAssociations();
-    }
-
-    // Create User
-    function openCreateUserModal() { document.getElementById('createUserModal').classList.remove('hidden');  document.getElementById('createUserModal').classList.add('flex'); }
-    function closeCreateUserModal() { document.getElementById('createUserModal').classList.add('hidden'); }
-    document.getElementById('createUserForm').onsubmit = async e => {
-      e.preventDefault(); const form=e.target; const body=Object.fromEntries(new FormData(form));
-      await axios.post(userApi, body);
-      closeCreateUserModal(); alert('تم إنشاء المستخدم بنجاح');
-    };
-
-    // Initialize
-    window.onload = loadAssociations;
   </script>
 </body>
+
 </html>
