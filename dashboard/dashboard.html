@@ -25,6 +25,19 @@
       color: #fff;
       padding: 3% 5%;
     }
+
+      @media (max-width: 768px) {
+    table th, table td {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    table th, table td {
+      font-size: 0.7rem;
+    }
+  }
   </style>
 </head>
 
@@ -141,9 +154,9 @@
 
   <!-- تحت الـ <template id="associationsTemplate"> -->
   <template id="usersTemplate">
-<div class="flex justify-end mb-4">
+<div class="flex justify-start mb-4">
   <button onclick="openCreateUserModal()"
-    class="bg-green-600 text-right hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
+    class="bg-[#129990] text-right hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
     + إنشاء مستخدم
   </button>
 </div>
