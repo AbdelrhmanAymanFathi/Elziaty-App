@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" >
+<html lang="ar">
 
 <head>
   <meta charset="UTF-8">
@@ -9,7 +9,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="mainLayout.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,14 +31,45 @@
       <div class="popup-menu" id="popup-menu">
         <a href="./profile.html" class="text-sm text-black">Profile</a>
         <button>Settings </button>
-        <button class="logout-btn" id="logout-btn">Logout</button>   
+        <button class="logout-btn" id="logout-btn">Logout</button>
       </div>
     </div>
   </div>
 
   <!-- Dashboard Content -->
   <div class="container dashboard-container">
-    <h3 class="mb-4 text-center">My Joined Associations</h3>
+    <!-- البطاقة الأولى -->
+  <div class="w-full max-w-md bg-[#092BA712] rounded-xl p-4 shadow-md flex flex-col gap-3 mb-4 mt-5">
+    <div class="flex justify-between items-start">
+      <div class="flex flex-col gap-1">
+        <h2 class="text-[#333] font-bold text-lg">خليك جاهز للصيف</h2>
+        <a  onclick="location.href='join.html'" href="./join.html" class="text-[#3B82F6] text-sm font-medium ">إشترك في جمعيه</a>
+        <p class="text-[#333] text-sm font-semibold mt-2">بخصم 20% علي الرسوم</p>
+      </div>
+      <div class="text-5xl text-[#3B82F6]">⛱️</div>
+    </div>
+    <div class="text-yellow-400 text-xl">☀️</div>
+  </div>
+    <!-- end card 1 -->
+
+    <!-- البطاقة الثانية -->
+  <div class="w-full max-w-md bg-[#499F6882] rounded-xl p-4 shadow-md flex flex-col gap-4 mb-4">
+    <div class="flex items-center gap-3">
+      <div ><img src="./Assets/imgs/Group 13986.svg" alt=""></div>
+      <div class="flex flex-col">
+        <p class="text-[#1E1E1E] text-sm font-bold">خصم 300ر.س ليك ولأصحابك.</p>
+        <p class="text-[#1E1E1E] text-sm">إبعت دعوات أكتر، إستفيد بخصومات أكبر.</p>
+      </div>
+    </div>
+    <div class="flex justify-between items-center px-4">
+      <div class=""><img src="./Assets/imgs/Group 13987.svg" alt=""></div>
+      <button class="bg-white text-[#1E1E1E] font-semibold text-sm px-4 py-2 rounded-lg border border-gray-400 hover:bg-gray-100 transition">
+        إبعت دعوه
+      </button>
+    </div>
+  </div>
+    <!-- end card 2 -->
+    <h3 class="mb-4 text-center text-[#0FA451]">My Joined Associations</h3>
     <div id="circle-list">
       <!-- هنا سيُعرض محتوى الجمعيات التي انضممت إليها -->
     </div>
@@ -41,8 +78,8 @@
   <!-- Navbar Bottom -->
   <div class="bottom-navbar">
     <div onclick="location.href='home.html'">
-      <i class="bi bi-house-door-fill"></i>
-      <div class="label"> Home</div>
+      <i class="bi bi-house-door-fill text-[#28A505]"></i>
+      <div class="label text-[#28A505]"> Home</div>
     </div>
     <div onclick="location.href='circle-list.html'">
       <i class="bi bi-people-fill"></i>
