@@ -70,13 +70,36 @@
     }
 
     // Create User
-    function openCreateUserModal() { document.getElementById('createUserModal').classList.remove('hidden');  document.getElementById('createUserModal').classList.add('flex'); }
-    function closeCreateUserModal() { document.getElementById('createUserModal').classList.add('hidden'); }
-    document.getElementById('createUserForm').onsubmit = async e => {
-      e.preventDefault(); const form=e.target; const body=Object.fromEntries(new FormData(form));
-      await axios.post(userApi, body);
-      closeCreateUserModal(); alert('تم إنشاء المستخدم بنجاح');
-    };
+const createuserApi = "http://localhost:3000/api/userData/admin/create-user";
+
+  function openCreateUserModal() {
+    document.getElementById('createUserModal').classList.remove('hidden');
+    document.getElementById('createUserModal').classList.add('flex');
+  }
+
+  function closeCreateUserModal() {
+    document.getElementById('createUserModal').classList.remove('flex');
+    document.getElementById('createUserModal').classList.add('hidden');
+  }
+
+  document.getElementById('createUserForm').onsubmit = async e => {
+    e.preventDefault();
+    const form = e.target;
+    const body = Object.fromEntries(new FormData(form));
+
+    try {
+      const res = await axios.post(createuserApi, body);
+      if (res.data.message === "User created successfully") {
+        alert("تم إنشاء المستخدم بنجاح");
+        closeCreateUserModal();
+        form.reset();
+        // Optional: إعادة تحميل البيانات من السيرفر لعرضها في الجدول
+      }
+    } catch (error) {
+      console.error(error);
+      alert("حدث خطأ أثناء إنشاء المستخدم");
+    }
+  };
 
     // Initialize
     window.onload = loadAssociations;
@@ -88,7 +111,7 @@ const usersApi = 'http://localhost:3000/api/userData/users'; // Users endpoint
 function renderUserRow(user, index) {
   // تأكد إن رقم التليفون بصيغة دولية بدون +، مثلاً: "2010XXXXXXX"
   const waNumber = user.phone.startsWith('0')
-    ? '2' + user.phone.slice(1)        // لو عندك أرقام محلية تبدأ بـ0 شيلها وحط 2 (كود مصر)
+    ? '+20' + user.phone.slice(1)        // لو عندك أرقام محلية تبدأ بـ0 شيلها وحط 2 (كود مصر)
     : user.phone;                     // لو بالفعل دولي
 
   return `
@@ -133,3 +156,80 @@ async function loadUsers() {
       `<tr><td colspan="7" class="text-center p-4 text-red-500">فشل تحميل المستخدمين</td></tr>`;
   }
 }
+
+
+function renderAssociationCard(assoc) {
+  return `
+    <div class="bg-white p-4 rounded-lg shadow space-y-2 flex flex-col">
+      <h3 class="font-bold text-lg">${assoc.name}</h3>
+      <!-- بيانات الجمعية -->
+      <p>المبلغ الشهري: ${assoc.monthlyAmount}</p>
+      <p>المدة: ${assoc.duration} ${assoc.type}</p>
+      <p>الحالة: ${assoc.status}</p>
+      <p>الحد الأقصى للأعضاء: ${assoc.maxMembers}</p>
+      <!-- أزرار -->
+      <div class="mt-auto flex justify-between space-x-2 rtl:space-x-reverse">
+        <button onclick="openEditAssociationModal(${assoc.id}, ${assoc.monthlyAmount}, ${assoc.duration}, '${assoc.status}')"
+                class="text-blue-600 hover:underline">تعديل</button>
+        <button onclick="openDeleteAssociationModal(${assoc.id})"
+                class="text-red-600 hover:underline">حذف</button>
+        <button onclick="loadMembers(${assoc.id})"
+                class="text-green-600 hover:underline">عرض الأعضاء</button>  <!-- زر جديد -->
+      </div>
+    </div>
+  `;
+}
+
+// دالة لترندر صف عضو
+function renderMemberRow(member, idx) {
+  return `
+    <tr class="border-t">
+      <td class="px-4 py-2">${idx + 1}</td>
+      <td class="px-4 py-2">${member.name}</td>
+      <td class="px-4 py-2">${member.phone}</td>
+      <td class="px-4 py-2">${member.hasReceived ? 'نعم' : 'لا'}</td>
+      <td class="px-4 py-2">${member.lastReceivedDate
+        ? new Date(member.lastReceivedDate).toLocaleDateString('ar-EG')
+        : '-'}</td>
+    </tr>
+  `;
+}
+
+// دالة لجلب وعرض الأعضاء
+async function loadMembers(assocId) {
+  // استيراد التمبليت
+  const tpl = document.getElementById('membersTemplate').content.cloneNode(true);
+  // ربط الكونتينر
+  const container = tpl.getElementById('membersContainer');
+  // تفريغ المحتوى القديم
+  const content = document.getElementById('contentContainer');
+  content.innerHTML = '';
+  content.appendChild(tpl);
+
+  try {
+    const res = await axios.get(`${assocApi}/${assocId}/members`);
+    const members = res.data.data;
+    if (!Array.isArray(members) || members.length === 0) {
+      container.innerHTML = `
+        <tr>
+          <td colspan="5" class="px-4 py-2 text-center text-red-500">
+            لا يوجد أعضاء حالياً
+          </td>
+        </tr>`;
+      return;
+    }
+    // بنحط كل صف
+    container.innerHTML = members
+      .map((m, i) => renderMemberRow(m, i))
+      .join('');
+  } catch (err) {
+    console.error('خطأ في جلب الأعضاء:', err);
+    container.innerHTML = `
+      <tr>
+        <td colspan="5" class="px-4 py-2 text-center text-red-500">
+          فشل في تحميل الأعضاء
+        </td>
+      </tr>`;
+  }
+}
+

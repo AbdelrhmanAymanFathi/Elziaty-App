@@ -180,6 +180,25 @@
   </template>
 
 
+  <template id="membersTemplate">
+  <div class="overflow-x-auto w-full">
+    <h2 class="text-xl font-bold mb-4">أعضاء الجمعية</h2>
+    <table class="min-w-full bg-white table-auto border-collapse border border-gray-200">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-4 py-2  text-red-500">#</th>
+          <th class="px-4 py-2 ">الاسم</th>
+          <th class="px-4 py-2 ">الهاتف</th>
+          <th class="px-4 py-2 ">استلمت؟</th>
+          <th class="px-4 py-2 ">آخر استلام</th>
+        </tr>
+      </thead>
+      <tbody id="membersContainer"></tbody>
+    </table>
+  </div>
+</template>
+
+
   <!--  -->
   <script src="./dashboard.js">
 

@@ -31,7 +31,7 @@ async function loadProfile() {
 
     const imgEl = document.getElementById('profile-image');
     const placeholder = 'https://via.placeholder.com/150?text=User';
-    imgEl.src = `http://localhost:3000/${data.profileImage}`;
+    imgEl.src = `http://localhost:3000/../money/uploads/${data.profileImage}`;
 
   } catch (err) {
     console.error(err);
