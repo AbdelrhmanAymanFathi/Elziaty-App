@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مبلغ القبض - الجمعيات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainLayout.css">
+    <style>
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 32px 8px 80px 8px;
+        }
+        .title {
+            color: #222;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            margin-top: 38px;
+            text-align: center;
+        }
+        .desc {
+            color: #58b231;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .amount-box {
+            background: #f6f6f6;
+            border-radius: 16px;
+            padding: 26px 0;
+            margin: 0 auto 42px auto;
+            text-align: center;
+            font-size: 1.22rem;
+            color: #444;
+            width: 90%;
+            border: none;
+            outline: none;
+        }
+        .input-amount {
+            background: transparent;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 1.22rem;
+            color: #444;
+            width: 70%;
+            direction: rtl;
+        }
+        .btn-next {
+            display: block;
+            width: 90%;
+            margin: 30px auto 0 auto;
+            padding: 14px 0;
+            border-radius: 22px;
+            background: linear-gradient(90deg, #50a535, #388b1a);
+            color: #fff;
+            border: none;
+            font-size: 1.12rem;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: background 0.2s;
+        }
+        .btn-next:active {
+            background: #277e18;
+        }
+    </style>
+    <!-- Tajawal font for better Arabic rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="title">كام هيكون مبلغ القبض؟</div>
+        <div class="desc">أكتب من ٣٠٠٠ ر.س إلى 1,200,000 ر.س</div>
+        <div class="amount-box">
+            <input type="number" class="input-amount" min="3000" max="1200000" placeholder="٠ ر.س" value="0"> ر.س
+        </div>
+        <button class="btn-next">التالي</button>
+    </div>
+</body>
+</html>

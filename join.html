@@ -1,112 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Association</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-  <link rel="stylesheet" href="./mainLayout.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    body { background-color: #f8f9fa; }
-    .suggestion-card {
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-    .suggestion-card:hover { transform: translateY(-5px); }
-    .section-heading {
-      border-bottom: 2px solid #dee2e6;
-      padding-bottom: .5rem;
-      margin-bottom: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>الانضمام إلى الجمعيات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainLayout.css">
+    <style>
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 24px 8px 80px 8px;
+        }
+        .title {
+            color: #64b730;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            margin-top: 28px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #333;
+        }
+        .arrow-downs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .arrow-downs span {
+            font-size: 2rem;
+            color: #c4c4c4;
+            margin: -10px 0;
+        }
+        .card {
+            border: 1.5px solid #eee;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px 0 #00000012;
+            padding: 18px;
+            margin-bottom: 20px;
+            background: #fafafa;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        .card.selected, .card:hover {
+            border: 1.5px solid #64b730;
+            box-shadow: 0 2px 18px 0 #64b73033;
+            background: #fff;
+        }
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #444;
+            font-size: 1.1rem;
+        }
+        .card-desc {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .arrow {
+            position: absolute;
+            left: 18px;
+            top: 24px;
+            font-size: 1.7rem;
+            color: #64b730;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: #fff;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 64px;
+            z-index: 10;
+        }
+        .bottom-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.93rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .bottom-nav .active {
+            color: #64b730;
+        }
+        .icon {
+            font-size: 1.7rem;
+            margin-bottom: 2px;
+        }
+    </style>
+    <!-- Tajawal font for better Arabic rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar Top -->
-  <div class="navbar">
-    <div class="d-flex">
-      <span class="icon" title="الإشعارات / Notifications"><i class="bi bi-bell-fill"></i></span>
-      <span class="icon" title="الرائج / Trends"><i class="bi bi-fire"></i></span>
+    <div class="container">
+        <div class="title">محتاج تعمل اي؟</div>
+        <div class="arrow-downs">
+            <span>⬇️</span>
+            <span>⬇️</span>
+            <span>⬇️</span>
+        </div>
+        <a href="association_amount.html" style="text-decoration:none;">
+          <div class="card">
+              <div class="card-title">إشتراك في جمعيه</div>
+              <div class="card-desc">
+                  إختار الدور اللي أنت عايزه بمبالغ دفع تصل لـ 1,200,000 ر.س في الجمعيه الواحدة
+              </div>
+              <div class="arrow">››</div>
+          </div>
+      </a>
+      
+        <div class="card">
+            <div class="card-title">إشتراك في برنامج التمويل</div>
+            <div class="card-desc">
+                حصول لحد 1,000,000 ر.س بالتقسيط وخصم في أخر المدة اللي تختارها بكيفك، ذلك يصل لـ 20%
+            </div>
+            <div class="arrow">››</div>
+        </div>
     </div>
-    <div class="user-profile" id="profile-toggle" title="الملف الشخصي / Profile">
-      <i class="bi bi-person-circle"></i>
-      <div class="popup-menu" id="popup-menu">
-        <a href="./profile.html" class="text-sm text-black">Profile</a>
-        <button>Settings </button>
-        <button class="logout-btn" id="logout-btn">Logout</button>   
-      </div>
+    <div class="bottom-nav">
+        <a href="home.html">
+            <span class="icon">🏠</span>
+            الرئيسية
+        </a>
+        <a href="join.html" class="active">
+            <span class="icon">🟢</span>
+            الجمعيات
+        </a>
+        <a href="wallet.html">
+            <span class="icon">💳</span>
+            محفظتي
+        </a>
+        <a href="payments.html">
+            <span class="icon">💰</span>
+            المدفوعات
+        </a>
+        <a href="profile.html">
+            <span class="icon">👤</span>
+            ملفي
+        </a>
     </div>
-  </div>
-
-<main>
-  <div class="container py-5">
-
-    <!-- My Associations -->
-    <div id="joinedSection" class="mb-5 d-none">
-      <h3 class="section-heading">My Associations</h3>
-      <div id="joinedContainer" class="row g-4 p-2"></div>
-    </div>
-
-    <!-- Suggest New -->
-    <h2 class="mb-4 text-center">Suggested Associations</h2>
-    <div class="mb-3">
-      <label for="amount" class="form-label">Enter Desired Amount:</label>
-      <input
-        type="number"
-        id="amount"
-        class="form-control"
-        placeholder="e.g. 11000"
-        min="1"
-      />
-    </div>
-    <button id="fetchSuggestions" class="btn btn-primary w-100 mb-4">
-      Find Associations
-    </button>
-    <div id="suggestionsContainer" class="row g-4 p-2"></div>
-  </div>
-
-</main>
-
-
-  <!-- Navbar Bottom -->
-  <div class="bottom-navbar">
-    <div onclick="location.href='home.html'">
-      <i class="bi bi-house-door-fill"></i>
-      <div class="label"> Home</div>
-    </div>
-    <div onclick="location.href='circle-list.html'">
-      <i class="bi bi-people-fill"></i>
-      <div class="label"> My Circles</div>
-    </div>
-    <div onclick="location.href='join.html'">
-      <i class="bi bi-card-checklist text-[#28A505]"></i>
-      <div class="label text-[#28A505]"> Subscribe</div>
-    </div>
-    <div onclick="location.href='./wallet.html'">
-      <i class="bi bi-credit-card-fill"></i>
-      <div class="label"> wallet </div>
-    </div>
-    <div onclick="location.href='payments.html'">
-      <i class="bi bi-file-earmark-check-fill"></i>
-      <div class="label"> Payments</div>
-    </div>
-  </div>
-
-
-  
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <script src="./join.js"></script>
 </body>
 </html>
