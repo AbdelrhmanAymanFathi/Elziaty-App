@@ -86,18 +86,33 @@ const usersApi = 'http://localhost:3000/api/userData/users'; // Users endpoint
 
 // دالة ترندر صف مستخدم
 function renderUserRow(user, index) {
+  // تأكد إن رقم التليفون بصيغة دولية بدون +، مثلاً: "2010XXXXXXX"
+  const waNumber = user.phone.startsWith('0')
+    ? '2' + user.phone.slice(1)        // لو عندك أرقام محلية تبدأ بـ0 شيلها وحط 2 (كود مصر)
+    : user.phone;                     // لو بالفعل دولي
+
   return `
     <tr class="border-t">
-      <td class="px-4 py-2">${index + 1}</td>
-      <td class="px-4 py-2">${user.fullName}</td>
-      <td class="px-4 py-2">${user.nationalId}</td>
-      <td class="px-4 py-2">${user.phone}</td>
-      <td class="px-4 py-2">${user.walletBalance}</td>
-      <td class="px-4 py-2">${user.role}</td>
-      <td class="px-4 py-2">${new Date(user.createdAt).toLocaleDateString('ar-EG')}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${index + 1}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${user.fullName}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${user.nationalId}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${user.phone}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap text-center text-green-600">
+        <a class="text-center" href="https://wa.me/${waNumber}" target="_blank" title="أرسل رسالة واتساب">
+          <!-- أيقونة واتساب بسيطة -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16.67 13.412c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.672.149-.198.297-.767.967-.94 1.165-.173.198-.346.223-.643.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.52-.074-.149-.672-1.612-.92-2.21-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.793.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.075c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 .5C5.648.5.5 5.648.5 12c0 2.115.552 4.09 1.513 5.81L.5 23.5l5.924-1.55A11.457 11.457 0 0012 23.5c6.352 0 11.5-5.148 11.5-11.5S18.352.5 12 .5zm0 21c-1.795 0-3.483-.467-4.96-1.353l-.354-.21-3.515.92.938-3.43-.229-.365A9.436 9.436 0 012.5 12c0-5.242 4.258-9.5 9.5-9.5s9.5 4.258 9.5 9.5-4.258 9.5-9.5 9.5z"/>
+          </svg>
+        </a>
+      </td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${user.walletBalance}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${user.role}</td>
+      <td class="px-4 py-2 text-sm  whitespace-nowrap">${new Date(user.createdAt).toLocaleDateString('ar-EG')}</td>
     </tr>
   `;
 }
+
 
 // دالة لجلب وعرض المستخدمين
 async function loadUsers() {
