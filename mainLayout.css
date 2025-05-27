@@ -21,10 +21,10 @@ body {
   margin: 0 8px;
   /* font-size: 24px; */
   cursor: pointer;
-  background: silver;
+  /* background: silver; */
   color: black;
   border-radius: 50%;
-  padding: 8px 11px;
+  /* padding: 8px 11px; */
 }
 
 .navbar .icon:hover {
