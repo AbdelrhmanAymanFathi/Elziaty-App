@@ -1,7 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f6f9;
-
+  background-color: #d6e7e16c;
 }
 
 
@@ -64,6 +63,7 @@ body {
   cursor: pointer;
   color: black;
 }
+
 .popup-menu button {
   width: 100%;
   padding: 8px;
@@ -85,7 +85,7 @@ body {
 .dashboard-container {
   padding: 20px;
   margin-bottom: 80px;
-  
+
 }
 
 .circle-card {
@@ -135,4 +135,3 @@ body {
   font-size: 12px;
   margin-top: 2px;
 }
-

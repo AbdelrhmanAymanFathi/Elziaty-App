@@ -28,8 +28,8 @@
     }
 
     // Fetch suggestions
-    $('#fetchSuggestions').on('click', function() {
-      const amount = parseFloat($('#amount').val());
+    $('.btn-next').on('click', function() {
+      const amount = parseFloat($('.input-amount').val());
       if (!amount || amount < 1) {
         return alert('Please enter a valid amount (minimum 1).');
       }

@@ -1,0 +1,60 @@
+  
+    <!-- Navbar Top -->
+  <div style="background: linear-gradient(to right, #5fafaf 0% ,#bfdfdf 100%);"
+    class="navbar flex justify-between items-center px-4 py-2 shadow-md rounded-b-lg">
+    <!-- Left icons -->
+    <div class="flex gap-4">
+      <span class="icon" title="الإشعارات / Notifications">
+        <i class="bi bi-bell-fill text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      </span>
+      <span class="icon" title="الرائج / Trends">
+        <i class="bi bi-fire text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      </span>
+    </div>
+
+    <!-- User profile icon -->
+    <div class="user-profile relative" id="profile-toggle" title="الملف الشخصي / Profile">
+      <i class="bi bi-person-circle text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      <!-- Popup menu -->
+      <div class="popup-menu absolute right-0 mt-2 hidden bg-white shadow-md p-2 rounded-md" id="popup-menu">
+        <a href="./profile.html" class="block text-sm text-black">Profile</a>
+        <button class="block text-sm w-full text-left">Settings</button>
+        <button class="logout-btn block text-sm w-full text-left text-red-600" id="logout-btn">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  
+  <!-- Navbar Bottom -->
+  <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background: linear-gradient(to right, #5fafaf 0% ,#bfdfdf 100%);">
+
+    <div onclick="location.href='home.html'" class="p-0">
+      <i class="bi bi-house-door-fill text-[#28A505] text-xl "></i>
+      <div class="label text-[#28A505]">الرئيسية</div>
+    </div>
+
+    <div onclick="location.href='circle-list.html'" class="p-0">
+      <i class="bi bi-people-fill text-xl"></i>
+      <div class="label">جمعياتي</div>
+    </div>
+
+    <div onclick="location.href='join.html'" class="active-footer p-0 mb-3" >
+      <span class="material-symbols-outlined text-3xl">
+        arrow_circle_left
+      </span>
+      <div class="label" style="color:#16a34a; font-weight:700;">انضم الان</div>
+    </div>
+
+    <div onclick="location.href='./wallet.html'" class="p-0">
+      <i class="bi bi-credit-card-fill text-xl"></i>
+      <div class="label">محفظتي</div>
+    </div>
+
+    <div onclick="location.href='payments.html'" class="p-0">
+      <i class="bi bi-file-earmark-check-fill text-xl"></i>
+      <div class="label">المدفوعات</div>
+    </div>
+
+  </div>
