@@ -112,6 +112,16 @@
         .btn-next:active {
             background: #277e18;
         }
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.2em;
+            margin-right: 0.5rem;
+        }
+        .btn-next:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
   </style>
     <link rel="stylesheet" href="mainLayout.css">
 
@@ -151,9 +161,9 @@
         <div class="title">كام هيكون مبلغ القبض؟</div>
         <div class="desc">أكتب من ٣٠٠٠ ر.س إلى 1,200,000 ر.س</div>
         <div class="amount-box">
-            <input type="number" class="input-amount" min="3000" max="1200000" placeholder="٠ ر.س" value="0"> ر.س
+            <input type="number" class="input-amount" id="amountInput" min="3000" max="1200000" placeholder="٠ ر.س" value="0"> ر.س
         </div>
-        <button class="btn-next">التالي</button>
+        <button class="btn-next" id="nextButton">التالي</button>
 
 
     </div>
@@ -221,6 +231,74 @@ document.getElementById("profile-toggle").addEventListener("click", () => {
 document.getElementById("logout-btn").addEventListener("click", () => {
   localStorage.removeItem("token");
   window.location.href = "login.html";
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const amountInput = document.getElementById('amountInput');
+    const nextButton = document.getElementById('nextButton');
+
+    // Validate amount on input
+    amountInput.addEventListener('input', () => {
+        const amount = parseInt(amountInput.value);
+        if (amount < 3000 || amount > 1200000) {
+            nextButton.disabled = true;
+            nextButton.style.opacity = '0.5';
+        } else {
+            nextButton.disabled = false;
+            nextButton.style.opacity = '1';
+        }
+    });
+
+    // Handle next button click
+    nextButton.addEventListener('click', async () => {
+        const amount = parseInt(amountInput.value);
+        
+        if (amount < 3000 || amount > 1200000) {
+            alert('الرجاء إدخال مبلغ بين ٣٠٠٠ و ١,٢٠٠,٠٠٠ ريال');
+            return;
+        }
+
+        try {
+            // Show loading state
+            nextButton.disabled = true;
+            nextButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> جاري الإنشاء...';
+
+            // Create the association
+            const response = await fetch('http://localhost:3000/api/associations', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: `جمعية ${amount} ريال`,
+                    monthlyAmount: amount,
+                    maxMembers: 10,
+                    startDate: new Date().toISOString().split('T')[0],
+                    type: 'B'
+                })
+            });
+
+            const data = await response.json();
+
+            if (!data.success && !data.association) {
+                throw new Error(data.error || 'فشل في إنشاء الجمعية');
+            }
+
+            // Save association ID and amount to localStorage
+            localStorage.setItem('selectedAssociationId', data.association.id);
+            localStorage.setItem('associationAmount', amount);
+
+            // Navigate to turn selection page
+            window.location.href = 'select_turn.html';
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert(error.message || 'حدث خطأ أثناء إنشاء الجمعية');
+            nextButton.disabled = false;
+            nextButton.innerHTML = 'التالي';
+        }
+    });
 });
   </script>
   <!-- Scripts -->

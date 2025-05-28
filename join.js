@@ -1,4 +1,3 @@
-
     // 1. Require login via token in localStorage
     const token = localStorage.getItem('token');
     if (!token) {
@@ -145,11 +144,21 @@
 
     // Load joined associations on page load
     function loadJoinedAssociations() {
+      if (!token) {
+        console.log('No token found, skipping joined associations load');
+        return;
+      }
+
       $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/associations/joined',
         headers: { Authorization: 'Bearer ' + token },
         success: function(res) {
+          if (!res.success) {
+            console.log('No joined associations found');
+            return;
+          }
+          
           const associations = res.associations || [];
           if (associations.length > 0) {
             $('#joinedSection').removeClass('hidden');
@@ -209,9 +218,24 @@
           });
         },
         error: function(err) {
-          console.error('Error loading joined associations:', err);
+          console.log('Error loading joined associations:', err);
+          // Don't show error to user since this is not critical
         }
       });
     }
 
-    $(document).ready(loadJoinedAssociations);
+    // Call loadJoinedAssociations when document is ready
+    $(document).ready(function() {
+      loadJoinedAssociations();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const btn = document.getElementById("joinNowBtn");
+        if (btn) {
+            btn.onclick = function(event) {
+                event.preventDefault();
+                // You can pass parameters via query string if you need to
+                window.location.href = "select_turn.html";
+            }
+        }
+    });
