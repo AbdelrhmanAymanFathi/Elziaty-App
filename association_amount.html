@@ -28,7 +28,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      height: 64px;
+      height: 54px;
       z-index: 10;
       box-shadow: 0 2px 10px #0001;
       font-size: 13px;
@@ -131,7 +131,7 @@
 </head>
 <body>
         <!-- Navbar Top -->
-  <div style="background: linear-gradient(to right, #5fafaf 0% ,#bfdfdf 100%);"
+  <div style="background-color:#90D1CA;"
     class="navbar flex justify-between items-center px-4 py-1 shadow-md rounded-b-lg">
     <!-- Left icons -->
     <div class="flex gap-4">
@@ -159,7 +159,7 @@
    <main class="flex-grow container mx-auto py-8 px-4 mb-20">
     <div class="container">
         <div class="title">كام هيكون مبلغ القبض؟</div>
-        <div class="desc">أكتب من ٣٠٠٠ ر.س إلى 1,200,000 ر.س</div>
+        <div class="desc">أكتب من 3000 ر.س إلى 15,000 ر.س</div>
         <div class="amount-box">
             <input type="number" class="input-amount" id="amountInput" min="3000" max="1200000" placeholder="٠ ر.س" value="0"> ر.س
         </div>
@@ -181,11 +181,11 @@
 
 
   <!-- Navbar Bottom -->
-  <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background: linear-gradient(to right, #5fafaf 0% ,#bfdfdf 100%);">
+  <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background-color:#90D1CA;">
 
     <div onclick="location.href='home.html'" class="p-0">
-      <i class="bi bi-house-door-fill  text-xl "></i>
-      <div class="label">الرئيسية</div>
+      <i class="bi bi-house-door-fill text-[#28A505] text-xl "></i>
+      <div class="label text-[#28A505]">الرئيسية</div>
     </div>
 
     <div onclick="location.href='circle-list.html'" class="p-0">
@@ -193,10 +193,11 @@
       <div class="label">جمعياتي</div>
     </div>
 
-    <div onclick="location.href='join.html'" class="active-footer p-0 mb-3 text-[#28A505]" >
-      <span class="material-symbols-outlined text-3xl">
+    <div onclick="location.href='join.html'" class="grid justify-center active-footer p-0 mb-3" >
+      <!-- <span class="material-symbols-outlined text-3xl">
         arrow_circle_left
-      </span>
+      </span> -->
+      <img src="./Assets/imgs/SubscribeIcon.svg" class="" alt="">
       <div class="label" style="color:#16a34a; font-weight:700;">انضم الان</div>
     </div>
 

@@ -85,44 +85,12 @@
   </div>
 
   <!-- Dashboard Content -->
-  <div class="container dashboard-container" dir="ltr">
-    <!-- البطاقة الأولى -->
-    <div class="w-full max-w-md bg-[#092BA712] rounded-xl p-4 shadow-md flex flex-col gap-3 mb-4 mt-5">
-      <div class="flex justify-between items-start">
-        <div class="flex flex-col gap-1">
-          <h2 class="text-[#333] font-bold text-lg">خليك جاهز للصيف</h2>
-          <a onclick="location.href='join.html'" href="./join.html" class="text-[#3B82F6] text-sm font-medium ">إشترك في
-            جمعيه</a>
-          <p class="text-[#333] text-sm font-semibold mt-2">بخصم 20% علي الرسوم</p>
-        </div>
-        <div class="text-5xl text-[#3B82F6]">⛱️</div>
-      </div>
-      <div class="text-yellow-400 text-xl text-end">☀️</div>
-    </div>
-    <!-- end card 1 -->
+  <div class="container dashboard-container">
 
-    <!-- البطاقة الثانية -->
-    <div class="w-full max-w-md bg-[#499F6882] rounded-xl p-4 shadow-md flex flex-col gap-4 mb-4" dir="ltr">
-      <div class="flex items-center gap-3">
-        <div><img src="./Assets/imgs/Group 13986.svg" alt=""></div>
-        <div class="flex flex-col">
-          <p class="text-[#1E1E1E] text-sm font-bold text-end">خصم 300ر.س ليك ولأصحابك.</p>
-          <p class="text-[#1E1E1E] text-sm text-end">إبعت دعوات أكتر، إستفيد بخصومات أكبر.</p>
-        </div>
-      </div>
-      <div class="flex justify-between items-center px-4">
-        <div class=""><img src="./Assets/imgs/Group 13987.svg" alt=""></div>
-        <button
-          class="bg-white text-[#1E1E1E] font-semibold text-sm px-4 py-2 rounded-lg border border-gray-400 hover:bg-gray-100 transition">
-          إبعت دعوه
-        </button>
-      </div>
-    </div>
-    <!-- end card 2 -->
 
-    <h3 class="hidden mb-4 text-center text-[#0FA451]">جمعياتي المنضمة<br><span style="font-size:12px;">My Joined
+    <h3 class="mb-4 text-center text-[#0FA451]">جمعياتي المنضمة<br><span style="font-size:12px;">My Joined
         Associations</span></h3>
-    <div id="circle-list hidden">
+    <div id="circle-list">
       <!-- هنا سيُعرض محتوى الجمعيات التي انضممت إليها -->
     </div>
   </div>
@@ -130,14 +98,14 @@
   <!-- Navbar Bottom -->
   <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background-color:#90D1CA;">
 
-    <div onclick="location.href='home.html'" class="p-0">
-      <i class="bi bi-house-door-fill text-[#008D10] text-xl "></i>
-      <div class="label text-[#008D10]">الرئيسية</div>
+    <div onclick="location.href='home.html'" class="p-0 ">
+      <i class="bi bi-house-door-fill  text-xl "></i>
+      <div class="label ">الرئيسية</div>
     </div>
 
-    <div onclick="location.href='circle-list.html'" class="p-0">
-      <i class="bi bi-people-fill text-xl"></i>
-      <div class="label">جمعياتي</div>
+    <div onclick="location.href='circle-list.html'" class="p-0 text-[#008D10]">
+      <i class="bi bi-people-fill text-xl text-[#008D10]"></i>
+      <div class="label text-[#008D10]">جمعياتي</div>
     </div>
 
     <div onclick="location.href='join.html'" class="grid justify-center active-footer p-0 mb-3" >

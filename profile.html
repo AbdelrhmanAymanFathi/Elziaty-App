@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" >
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,23 +13,35 @@
 <body class="bg-gray-100 font-sans">
 
   <!-- Navbar Top -->
-  <div class="navbar">
-    <div class="d-flex">
-      <span class="icon" title="الإشعارات / Notifications"><i class="bi bi-bell-fill"></i></span>
-      <span class="icon" title="الرائج / Trends"><i class="bi bi-fire"></i></span>
+
+  <!-- Navbar Top -->
+  <div style="background-color:#90D1CA;"
+    class="navbar flex justify-between items-center px-4 py-1 shadow-md rounded-b-lg" dir="ltr">
+    <!-- Left icons -->
+    <div class="flex gap-4">
+      <span class="icon" title="الإشعارات / Notifications">
+        <i class="bi bi-bell-fill text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      </span>
+      <span class="icon" title="الرائج / Trends">
+        <i class="bi bi-fire text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      </span>
     </div>
-    <div class="user-profile" id="profile-toggle" title="الملف الشخصي / Profile">
-      <i class="bi bi-person-circle"></i>
-      <div class="popup-menu" id="popup-menu">
-        <a href="./profile.html" class="text-sm text-black">Profile</a>
-        <button>Settings </button>
-        <button class="logout-btn" id="logout-btn">Logout</button>
+
+    <!-- User profile icon -->
+    <div class="user-profile relative" id="profile-toggle" title="الملف الشخصي / Profile">
+      <i class="bi bi-person-circle text-2xl text-black hover:text-[#16a34a] transition-colors duration-200"></i>
+      <!-- Popup menu -->
+      <div class="popup-menu absolute right-0 mt-2 hidden bg-white shadow-md p-2 rounded-md" id="popup-menu">
+        <a href="./profile.html" class="block text-sm text-black">Profile</a>
+        <button class="block text-sm w-full text-left">Settings</button>
+        <button class="logout-btn block text-sm w-full text-left text-red-600" id="logout-btn">Logout</button>
       </div>
     </div>
   </div>
 
   <!-- Profile Card -->
   <main class="min-h-screen flex items-center justify-center p-4 pb-20">
+    
     <div id="profile-card" class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
       <!-- Profile Image -->
       <div class="flex justify-center">
@@ -67,27 +79,37 @@
   </main>
 
   <!-- Navbar Bottom -->
-  <div class="bottom-navbar">
-    <div onclick="location.href='home.html'">
-      <i class="bi bi-house-door-fill"></i>
-      <div class="label"> Home</div>
+  <!-- Navbar Bottom -->
+  <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background-color:#90D1CA;">
+
+    <div onclick="location.href='home.html'" class="p-0">
+      <i class="bi bi-house-door-fill text-[#008D10] text-xl "></i>
+      <div class="label text-[#008D10]">الرئيسية</div>
     </div>
-    <div onclick="location.href='circle-list.html'">
-      <i class="bi bi-people-fill"></i>
-      <div class="label"> My Circles</div>
+
+    <div onclick="location.href='circle-list.html'" class="p-0">
+      <i class="bi bi-people-fill text-xl"></i>
+      <div class="label">جمعياتي</div>
     </div>
-    <div onclick="location.href='join.html'">
-      <i class="bi bi-card-checklist"></i>
-      <div class="label"> Subscribe</div>
+
+    <div onclick="location.href='join.html'" class="grid justify-center active-footer p-0 mb-3" >
+      <!-- <span class="material-symbols-outlined text-3xl">
+        arrow_circle_left
+      </span> -->
+      <img src="./Assets/imgs/SubscribeIcon.svg" class="" alt="">
+      <div class="label" style="color:#16a34a; font-weight:700;">انضم الان</div>
     </div>
-    <div onclick="location.href='master-card.html'">
-      <i class="bi bi-credit-card-fill"></i>
-      <div class="label"> My Card</div>
+
+    <div onclick="location.href='./wallet.html'" class="p-0">
+      <i class="bi bi-credit-card-fill text-xl"></i>
+      <div class="label">محفظتي</div>
     </div>
-    <div onclick="location.href='payments.html'">
-      <i class="bi bi-file-earmark-check-fill"></i>
-      <div class="label"> Payments</div>
+
+    <div onclick="location.href='payments.html'" class="p-0">
+      <i class="bi bi-file-earmark-check-fill text-xl"></i>
+      <div class="label">المدفوعات</div>
     </div>
+
   </div>
 
   <!-- Image Overlay for Enlargement -->
