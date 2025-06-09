@@ -20,6 +20,11 @@
     .submit-btn:hover {
       background-color: #0056b3;
     }
+    #register-error {
+      color: #dc3545;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -55,6 +60,7 @@
           <label for="salarySlipImage"> Salary Slip Image</label>
           <input type="file" class="form-control-file" id="salarySlipImage" name="salarySlipImage" accept="image/*">
         </div>
+        <div id="register-error" class="text-center"></div>
         <button type="submit" class="btn submit-btn btn-block"> Register</button>
       </form>
       <div class="text-center mt-3">
@@ -63,6 +69,7 @@
     </div>
   </div>
 
-  <script src="./register.js">  </script>
+  <script src="api.js"></script>
+  <script src="register.js"></script>
 </body>
 </html>

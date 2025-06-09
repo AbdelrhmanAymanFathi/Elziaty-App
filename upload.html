@@ -1,115 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payments</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="./mainLayout.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>رفع مفردات المرتب</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="mainLayout.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_circle_left" />
+    <script src="https://cdn.tailwindcss.com"></script>
   <style>
-
-    .step-box {
-      clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%);
-      z-index: -3;
-      position: relative;
-      overflow: hidden;
-      transition: clip-path 0.3s ease-in-out;
-
+    body {
+      background: #fafafa;
+      font-family: 'Tajawal', Arial, sans-serif;
     }
-
-    @media (max-width: 640px) {
-      .step-box {
-        clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
-      }
+    .upload-box {
+      border: 2px solid #16a34a;
+      border-radius: 18px;
+      background: #fff;
+      padding: 32px 16px;
+      margin: 32px auto;
+      max-width: 340px;
+      text-align: center;
+      box-shadow: 0 2px 12px 0 #00000012;
     }
-
-    .payment-card {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .payment-header {
+    .upload-icon {
+      border: 1.5px solid #16a34a;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      font-size: 2rem;
+      color: #16a34a;
     }
-
-    .payment-date {
-      color: #6c757d;
-    }
-
-    .payment-status {
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.9em;
-    }
-
-    .payment-status.paid {
-      background-color: #d4edda;
-      color: #155724;
-    }
-
-    .payment-status.pending {
-      background-color: #fff3cd;
-      color: #856404;
-    }
-
-    .payment-status.overdue {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
-
-    .payment-amount {
-      font-size: 1.2em;
+    .upload-btn {
+      border: 1.5px solid #16a34a;
+      border-radius: 22px;
+      background: #fff;
+      color: #16a34a;
       font-weight: bold;
-      margin: 10px 0;
-    }
-
-    .pay-btn {
-      width: 100%;
-      padding: 8px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      padding: 10px 0;
+      width: 80%;
+      margin: 18px auto 0 auto;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background 0.2s, color 0.2s;
+      display: block;
     }
-
-    .pay-btn:hover {
-      background-color: #218838;
+    .upload-btn:hover {
+      background: #16a34a;
+      color: #fff;
     }
-
-    .loading-spinner {
+    .bottom-navbar .active-footer .label {
+      color: #16a34a;
+      font-weight: 700;
+    }
+    .notification-dropdown {
       display: none;
-      text-align: center;
-      padding: 20px;
+      min-width: 220px;
+      max-width: 300px;
+      max-height: 320px;
+      overflow-y: auto;
+      right: 0;
+      top: 36px;
     }
-
-    .error-message {
-      color: #dc3545;
-      text-align: center;
-      margin: 10px 0;
-      display: none;
-    }
-
-    .error-message.visible {
+    .notification-dropdown.active {
       display: block;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<body>
 
-<body class="bg-[#f5f5f5]">
-  <!-- Navbar Top -->
-
-  <!-- Navbar Top -->
+    <!-- Navbar Top -->
   <div style="background-color:#90D1CA;"
     class="navbar flex justify-between items-center px-4 py-1 shadow-md rounded-b-lg" dir="ltr">
     <!-- Left icons -->
@@ -153,33 +119,30 @@
       </div>
     </div>
   </div>
+    <!-- end Navbar Top -->
 
-  <div class="container py-4">
-    <h2 class="text-center mb-4">Payments</h2>
-
-    <!-- Error Message -->
-    <div id="errorMessage" class="error-message"></div>
-
-    <!-- Loading Spinner -->
-    <div class="loading-spinner">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+<!-- Main Content -->
+<div class="flex justify-center items-center min-h-[60vh]">
+  <div class="border-2 border-dashed border-[#16a34a] rounded-xl bg-white p-8 w-[320px] text-center shadow-md">
+    <div class="flex justify-center mb-4">
+      <div class="border border-[#16a34a] rounded-full w-14 h-14 flex items-center justify-center text-3xl text-[#16a34a]">
+        <i class="bi bi-upload"></i>
       </div>
     </div>
-
-    <!-- Payments List -->
-    <div id="paymentsList">
-      <!-- Payment cards will be dynamically inserted here -->
-    </div>
+    <div class="mb-4 font-medium text-black">من فضلك ارفع صورة مفردات المرتب الخاصة بك!</div>
+    <input type="file" id="salary-slip" accept="image/*" class="hidden">
+    <label for="salary-slip" class="block border border-[#16a34a] rounded-full px-6 py-2 text-[#16a34a] font-bold cursor-pointer transition hover:bg-[#16a34a] hover:text-white w-fit mx-auto">
+      Choose Image
+    </label>
   </div>
-
-  <!-- Navbar Bottom -->
+</div>
+<!-- end Main Content -->
   <!-- Navbar Bottom -->
   <div class="bottom-navbar flex justify-between items-center px-1 py-0 shadow-md rounded-t-lg" style="background-color:#90D1CA;" dir="rtl">
 
     <div onclick="location.href='home.html'" class="p-0">
-      <i class="bi bi-house-door-fill text-xl "></i>
-      <div class="label ">الرئيسية</div>
+      <i class="bi bi-house-door-fill text-[#008D10] text-xl "></i>
+      <div class="label text-[#008D10]">الرئيسية</div>
     </div>
 
     <div onclick="location.href='circle-list.html'" class="p-0">
@@ -200,16 +163,14 @@
       <div class="label">محفظتي</div>
     </div>
 
-    <div onclick="location.href='payments.html'" class="p-0 text-[#008D10]">
+    <div onclick="location.href='payments.html'" class="p-0">
       <i class="bi bi-file-earmark-check-fill text-xl"></i>
       <div class="label">المدفوعات</div>
     </div>
 
   </div>
-
-  <script src="api.js"></script>
-  <script src="payments.js"></script>
+    <!-- end Navbar Bottom -->
   <script src="./MainLayout.js"></script>
-</body>
 
+</body>
 </html>

@@ -19,7 +19,7 @@ if (!token) {
 // جلب بيانات الملف الشخصي
 async function loadProfile() {
   try {
-    const res = await fetch('http://localhost:3000/api/userData/profile', {
+    const res = await fetch('https://money-production-bfc6.up.railway.app/api/userData/profile', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const data = await res.json();
@@ -31,7 +31,7 @@ async function loadProfile() {
 
     const imgEl = document.getElementById('profile-image');
     const placeholder = 'https://via.placeholder.com/150?text=User';
-    imgEl.src = `http://localhost:3000/../money/uploads/${data.profileImage}`;
+    imgEl.src = `./Backend/${data.profileImage}`;
 
   } catch (err) {
     console.error(err);

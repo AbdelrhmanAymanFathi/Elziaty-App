@@ -19,7 +19,7 @@ document.getElementById("logout-btn").addEventListener("click", () => {
 async function loadMyAssociations() {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/associations/my-associations",
+      "https://money-production-bfc6.up.railway.app/api/associations/my-associations",
       {
         headers: { Authorization: "Bearer " + token },
       }
@@ -52,7 +52,8 @@ json.data.forEach((a) => {
   );
 
   const card = document.createElement("div");
-  card.className = "max-w-md mx-auto bg-white border rounded-2xl shadow p-4 text-right font-sans mb-4";
+  card.className = "max-w-md mx-auto bg-white border rounded-2xl shadow p-4 text-right font-sans mb-4 cursor-pointer";
+  card.setAttribute('data-association-id', a.id);
 
   card.innerHTML = `
     <div class="flex items-center justify-between mb-2">
@@ -97,12 +98,17 @@ json.data.forEach((a) => {
     <div class="text-sm text-gray-500 text-center mt-2">No fees</div>
   `;
 
+  // card.addEventListener('click', () => {
+  //   localStorage.setItem('selectedAssociationId', a.id);
+  //   window.location.href = 'select_turn.html';
+  // });
+
   listEl.appendChild(card);
 });
 
   } catch (err) {
     console.error(err);
-    alert("❌ " + err.message);
+    console.log("❌ " + err.message);
   }
 }
 

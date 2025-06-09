@@ -23,6 +23,11 @@
     .login-btn:hover {
       background-color: #0056b3;
     }
+    #login-error {
+      color: #dc3545;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -38,6 +43,7 @@
           <label for="login-password">Password</label>
           <input type="password" class="form-control" id="login-password" required>
         </div>
+        <div id="login-error" class="text-center"></div>
         <button type="submit" class="btn login-btn btn-block">تسجيل الدخول</button>
       </form>
       <div class="text-center mt-3">
@@ -46,6 +52,7 @@
     </div>
   </div>
 
+  <script src="api.js"></script>
   <script src="login.js"></script>
 </body>
 </html>
